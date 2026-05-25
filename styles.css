@@ -758,6 +758,45 @@ figcaption {
   text-align: center;
 }
 
+.example-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.scan-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.scan-grid figure {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 16px 44px rgba(23, 32, 51, 0.08);
+}
+
+.scan-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: #0b1020;
+}
+
+.scan-grid figcaption {
+  margin: 0;
+  padding: 9px 10px;
+  color: var(--dark);
+  background: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-align: center;
+}
+
 .report {
   max-width: 980px;
   margin: 0 auto;
@@ -809,6 +848,10 @@ figcaption {
   .landing-links,
   .tumor-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .example-layout {
+    grid-template-columns: 1fr;
   }
 }
 

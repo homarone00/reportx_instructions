@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BraTS Reports Dataset Release</title>
+    <meta
+      name="description"
+      content="Structured definition of BraTS Reports dataset fields and annotation protocol."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body class="page-dataset">
+    <header class="site-header">
+      <nav class="topbar" aria-label="Primary navigation">
+        <div class="brand-lockup">
+          <a class="brand" href="index.html">BraTS Reports</a>
+          <a class="powered-by" href="https://aimagelab.unimore.it/" aria-label="Powered by AI Image Lab">
+            <span>Powered by</span>
+            <span class="aimagelab-wordmark" aria-hidden="true"><span class="ai-part">AI</span><span class="mage-part">mage</span><span class="lab-part">Lab</span></span>
+          </a>
+        </div>
+        <div class="nav-links">
+          <a href="dataset-release.html">Dataset release</a>
+          <a href="clinicians.html">Annotators</a>
+          <button class="share-button" type="button" data-share-button>Share</button>
+        </div>
+      </nav>
+      <section id="top" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">BraTS Reports instructions hub</p>
+          <h1>One template, three ways in.</h1>
+          <p>
+            Pick the documentation path you need: dataset release fields, the Italian
+            annotator guide, or the English annotator guide.
+          </p>
+          <div class="landing-links" aria-label="Documentation entry points">
+            <a class="landing-card dataset-card" href="dataset-release.html">
+              <span class="card-kicker">Dataset</span>
+              <strong>Release template</strong>
+              <span>Field definitions, tumor region legend, and machine/annotator ownership.</span>
+            </a>
+            <a class="landing-card clinician-card" href="clinicians.html">
+              <span class="card-kicker">Annotators</span>
+              <strong>Annotator guide</strong>
+              <span>Annotation protocol, annotation fields, examples, and language selector.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section id="dataset-release" class="section dataset-content">
+        <div class="section-heading">
+          <p class="eyebrow">Reference</p>
+          <h2>Tumor Region Legend</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Label</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ET</strong></td>
+                <td>Enhancing Tumor</td>
+              </tr>
+              <tr>
+                <td><strong>NETC</strong></td>
+                <td>Non-Enhancing Tumor Core</td>
+              </tr>
+              <tr>
+                <td><strong>ED</strong></td>
+                <td>Edema</td>
+              </tr>
+              <tr>
+                <td><strong>TC</strong></td>
+                <td>Tumor Core, defined as ET + NETC</td>
+              </tr>
+              <tr>
+                <td><strong>WT</strong></td>
+                <td>Whole Tumor, defined as ET + NETC + ED</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section dataset-content">
+        <div class="section-heading">
+          <p class="eyebrow">Template</p>
+          <h2>Field Definitions</h2>
+        </div>
+        <div class="table-wrap wide-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Assigned To</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>F001</td>
+                <td>Tumor Center Region</td>
+                <td>The tumor center is defined as the barycenter, or center of mass, of the TC region. The location of this point within the atlas is used to assign the corresponding anatomical region. To avoid cases in which the barycenter lies on a boundary, a spherical neighborhood with a radius equal to one tenth of the axial diameter is considered. The assigned region is then defined as the most prevalent region within this sphere.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F002</td>
+                <td>Tumor Center Coordinates</td>
+                <td>The coordinates of the barycenter are computed as the mean coordinates of all voxels in the TC region.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F003</td>
+                <td>Side of Tumor Center</td>
+                <td>Defined as the anatomical laterality of the tumor center based on the position of the TC barycenter relative to the brain midline, e.g., left, right, or midline.</td>
+                <td><span class="badge machine">Machine</span><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F004</td>
+                <td>Eloquent Brain Involvement</td>
+                <td>Determined using the atlas, this field specifies which of the following eloquent functional areas are involved by the tumor: vision, motor, speech motor, and speech receptive.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F005</td>
+                <td>Enhancement Quality</td>
+                <td>Qualitative assessment of CET contrast enhancement, indicating whether enhancement is present and how pronounced it appears.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F006</td>
+                <td>Proportion of ET</td>
+                <td>Automatically derived from the segmentation mask using the formula: n. voxel<sub>ET</sub> / n. voxel<sub>WT</sub>.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F007</td>
+                <td>Proportion of ED</td>
+                <td>Automatically derived from the segmentation mask using the formula: n. voxel<sub>ED</sub> / n. voxel<sub>WT</sub>.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F008</td>
+                <td>Proportion of NETC</td>
+                <td>Automatically derived from the segmentation mask using the formula: n. voxel<sub>NETC</sub> / n. voxel<sub>WT</sub>.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F009</td>
+                <td>Thickness of ET Margin</td>
+                <td>Defined as the geometrically computed average thickness of the ET margin.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F010</td>
+                <td>Definition of the Enhancing Margin</td>
+                <td>Assesses whether most of the outer margin of the enhancement is well defined or poorly defined.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F011</td>
+                <td>Definition of the Non-Enhancing Margin</td>
+                <td>Assesses whether most of the outer margin of the non-enhancing component is well defined or poorly defined.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F012</td>
+                <td>Intratumoral Hemorrhage</td>
+                <td>Assesses whether intrinsic hemorrhage is visible anywhere in the tumor matrix.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F013</td>
+                <td>TC Size</td>
+                <td>Defined as the largest perpendicular cross-sectional diameters of the TC across the axial, sagittal, and coronal planes.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F014</td>
+                <td>ED Size</td>
+                <td>Defined as the largest perpendicular cross-sectional diameters of the ED across the axial, sagittal, and coronal planes.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F015</td>
+                <td>Tumor Heterogeneity</td>
+                <td>The degree of heterogeneity of the internal architecture of the tumor.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F016</td>
+                <td>TC Affected Areas</td>
+                <td>Determined using the atlas, this field specifies which brain regions are affected by the TC.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F017</td>
+                <td>ED Affected Areas</td>
+                <td>Determined using the atlas, this field specifies which brain regions are affected by the ED.</td>
+                <td><span class="badge machine">Machine</span></td>
+              </tr>
+              <tr>
+                <td>F018</td>
+                <td>Number of Lesions</td>
+                <td>Number of independent lesions observed in the brain.</td>
+                <td><span class="badge machine">Machine</span><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F019</td>
+                <td>Type of Lesion</td>
+                <td>Categorical variable indicating the observed lesion type. Possible values: single, multicentric, or multifocal.</td>
+                <td><span class="badge machine">Machine</span><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F020</td>
+                <td>Ependymal Invasion</td>
+                <td>Assesses whether the TC abuts any adjacent ependymal surface.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F021</td>
+                <td>Depth of TC</td>
+                <td>Determines the depth of the TC. Possible values: cortical, subcortical white matter, deep white matter and basal nuclei.</td>
+                <td><span class="badge machine">Machine</span><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F022</td>
+                <td>Tumor Center Macroarea</td>
+                <td>The macroarea, or lobe, in which the barycenter lies, obtained using the atlas.</td>
+                <td><span class="badge machine">Machine</span><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F023</td>
+                <td>Midline Shift</td>
+                <td>The shift of the midline caused by the tumor mass, in millimeters.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F024</td>
+                <td>Tumor Shape</td>
+                <td>The approximate shape of the tumor mass.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F025</td>
+                <td>Tumor Origin</td>
+                <td>Where the tumor originates, following the grades: Periventricular, Gyral, or Deep white matter.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F026</td>
+                <td>Tumor Crosses Midline</td>
+                <td>State whether the tumor crosses the midline.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+              <tr>
+                <td>F027</td>
+                <td>Subject specific findings</td>
+                <td>Any subject specific findings that do not fall under any predefined category.</td>
+                <td><span class="badge clinician">Annotator</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="clinicians-en" class="section alt clinicians-en-content">
+        <div class="section-heading">
+          <p class="eyebrow">Annotator guide</p>
+          <h2>Annotators Version in English</h2>
+          <p>Free-text reporting instructions and annotator-facing fields translated from the Italian annotation guide.</p>
+        </div>
+        <div class="prose">
+          <p>Reports should be compiled in <strong>free-text format</strong>, evaluating each relevant template field. Information that is not present should be omitted, avoiding explicit statements about the absence of findings or characteristics that are not described.</p>
+          <p>During annotation, it is recommended to follow the same evaluation progression across cases to ensure consistency. Measurements should always be reported in millimeters. In cases with multiple lesions, the annotation protocol should be repeated for each lesion so that the reported information clearly refers to the correct lesion.</p>
+        </div>
+        <div class="table-wrap wide-table compact-guide">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Field</th>
+                <th>Clinical Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>F003</td>
+                <td>Side of Tumor Center</td>
+                <td>Anatomical laterality of the tumor center relative to the brain midline: left, right, or midline.</td>
+              </tr>
+              <tr>
+                <td>F005</td>
+                <td>Enhancement Quality</td>
+                <td>Qualitative assessment of CET contrast enhancement, including whether it is present and how pronounced it appears.</td>
+              </tr>
+              <tr>
+                <td>F010</td>
+                <td>Definition of the Enhancing Margin</td>
+                <td>Whether most of the outer enhancing margin is well defined or poorly defined.</td>
+              </tr>
+              <tr>
+                <td>F011</td>
+                <td>Definition of the Non-Enhancing Margin</td>
+                <td>Whether most of the outer non-enhancing component margin is well defined or poorly defined.</td>
+              </tr>
+              <tr>
+                <td>F012</td>
+                <td>Intratumoral Hemorrhage</td>
+                <td>Whether intrinsic hemorrhage is visible anywhere in the tumor matrix.</td>
+              </tr>
+              <tr>
+                <td>F015</td>
+                <td>Tumor Heterogeneity</td>
+                <td>Degree of heterogeneity of the tumor internal architecture.</td>
+              </tr>
+              <tr>
+                <td>F018</td>
+                <td>Number of Lesions</td>
+                <td>Number of independent lesions observed in the brain.</td>
+              </tr>
+              <tr>
+                <td>F019</td>
+                <td>Type of Lesion</td>
+                <td>Categorical lesion type: single, multicentric, or multifocal.</td>
+              </tr>
+              <tr>
+                <td>F020</td>
+                <td>Ependymal Invasion</td>
+                <td>Whether the TC abuts an adjacent ependymal surface.</td>
+              </tr>
+              <tr>
+                <td>F021</td>
+                <td>Depth of TC</td>
+                <td>Possible values: cortical, subcortical white matter, deep white matter, and basal nuclei.</td>
+              </tr>
+              <tr>
+                <td>F022</td>
+                <td>Tumor Center Macroarea</td>
+                <td>The macroarea or lobe in which the barycenter lies.</td>
+              </tr>
+              <tr>
+                <td>F023</td>
+                <td>Midline Shift</td>
+                <td>Shift of the midline caused by the tumor mass, reported in millimeters.</td>
+              </tr>
+              <tr>
+                <td>F024</td>
+                <td>Tumor Shape</td>
+                <td>Approximate shape of the tumor mass.</td>
+              </tr>
+              <tr>
+                <td>F025</td>
+                <td>Tumor Origin</td>
+                <td>Likely origin category: periventricular, gyral, or deep white matter.</td>
+              </tr>
+              <tr>
+                <td>F026</td>
+                <td>Tumor Crosses Midline</td>
+                <td>Whether the tumor crosses the midline.</td>
+              </tr>
+              <tr>
+                <td>F027</td>
+                <td>Subject-Specific Findings</td>
+                <td>Any subject-specific finding that does not fall under a predefined category.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="clinicians-it" class="section clinicians-it-content">
+        <div class="section-heading">
+          <p class="eyebrow">Versione italiana</p>
+          <h2>Template del Dataset BraTS Reports</h2>
+          <p>Definizione strutturata dei campi del dataset per la refertazione su ToothFairy4M.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Etichetta</th>
+                <th>Descrizione</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ET</strong></td>
+                <td>Enhancing Tumor</td>
+              </tr>
+              <tr>
+                <td><strong>NETC</strong></td>
+                <td>Non-Enhancing Tumor Core</td>
+              </tr>
+              <tr>
+                <td><strong>ED</strong></td>
+                <td>Edema</td>
+              </tr>
+              <tr>
+                <td><strong>TC</strong></td>
+                <td>Tumor Core, definito come ET + NETC</td>
+              </tr>
+              <tr>
+                <td><strong>WT</strong></td>
+                <td>Whole Tumor, definito come ET + NETC + ED</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section clinicians-it-content">
+        <div class="section-heading">
+          <p class="eyebrow">Campi di annotazione</p>
+          <h2>Definizione dei Campi</h2>
+        </div>
+        <div class="field-grid">
+          <article class="field-item">
+            <div>
+              <span class="field-id">F003</span>
+              <h3>Lato del Centro del Tumore</h3>
+              <p>Definito come la lateralità anatomica del centro del tumore in base alla posizione del baricentro del TC rispetto alla linea mediana del cervello, ad esempio sinistra, destra o linea mediana.</p>
+            </div>
+            <div class="image-placeholder">F003_lateralita_tumore</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F005</span>
+              <h3>Qualità dell'Enhancement</h3>
+              <p>Valutazione qualitativa dell'enhancement del contrasto CET, indicando se l'enhancement è presente e quanto appare pronunciato.</p>
+            </div>
+            <div class="image-placeholder">F005_qualita_enhancement</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F010</span>
+              <h3>Definizione del Margine Enhancing</h3>
+              <p>Valuta se la maggior parte del margine esterno dell'enhancement è ben definita o scarsamente definita.</p>
+            </div>
+            <div class="image-placeholder">F010_margine_enhancing</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F011</span>
+              <h3>Definizione del Margine Non-Enhancing</h3>
+              <p>Valuta se la maggior parte del margine esterno della componente non-enhancing è ben definita o scarsamente definita.</p>
+            </div>
+            <div class="image-placeholder">F011_margine_non_enhancing</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F012</span>
+              <h3>Emorragia Intratumorale</h3>
+              <p>Valuta se un'emorragia intrinseca è visibile in qualsiasi punto della matrice tumorale.</p>
+            </div>
+            <div class="image-placeholder">F012_emorragia_intratumorale</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F015</span>
+              <h3>Eterogeneità del Tumore</h3>
+              <p>Il grado di eterogeneità dell'architettura interna del tumore.</p>
+            </div>
+            <div class="image-placeholder">F015_eterogeneita_tumore</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F018</span>
+              <h3>Numero di Lesioni</h3>
+              <p>Numero di lesioni indipendenti osservate nel cervello.</p>
+            </div>
+            <div class="image-placeholder">F018_numero_lesioni</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F019</span>
+              <h3>Tipo di Lesione</h3>
+              <p>Variabile categorica che indica il tipo di lesione osservata. Valori possibili: singola, multicentrica o multifocale.</p>
+            </div>
+            <div class="image-placeholder">F019_tipo_lesione</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F020</span>
+              <h3>Invasione Ependimale</h3>
+              <p>Valuta se il TC è a contatto con una superficie ependimale adiacente.</p>
+            </div>
+            <div class="image-placeholder">F020_invasione_ependimale</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F021</span>
+              <h3>Profondità del TC</h3>
+              <p>Determina la profondità del TC. Valori possibili: corticale, sostanza bianca sottocorticale, sostanza bianca profonda e nuclei della base.</p>
+            </div>
+            <div class="image-placeholder">F021_profondita_tc</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F022</span>
+              <h3>Macroarea del Centro del Tumore</h3>
+              <p>La macroarea, o lobo, in cui ricade il baricentro, ottenuta utilizzando l'atlante.</p>
+            </div>
+            <div class="image-placeholder">F022_macroarea_centro</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F023</span>
+              <h3>Spostamento della Linea Mediana</h3>
+              <p>Lo spostamento della linea mediana causato dalla massa tumorale, in millimetri.</p>
+            </div>
+            <div class="image-placeholder">F023_spostamento_linea_mediana</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F024</span>
+              <h3>Forma del Tumore</h3>
+              <p>La forma approssimativa della massa tumorale.</p>
+            </div>
+            <div class="image-placeholder">F024_forma_tumore</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F025</span>
+              <h3>Origine del Tumore</h3>
+              <p>Dove origina il tumore, secondo le categorie: Periventricolare, Girale, Sostanza bianca profonda.</p>
+            </div>
+            <div class="image-placeholder">F025_origine_tumore</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F026</span>
+              <h3>Il Tumore Attraversa la Linea Mediana</h3>
+              <p>Indica se il tumore attraversa la linea mediana.</p>
+            </div>
+            <div class="image-placeholder">F026_crossing_linea_mediana</div>
+          </article>
+          <article class="field-item">
+            <div>
+              <span class="field-id">F027</span>
+              <h3>Reperti Specifici del Soggetto</h3>
+              <p>Qualsiasi reperto specifico del soggetto che non rientra in alcuna categoria predefinita.</p>
+            </div>
+            <div class="image-placeholder">F027_reperti_specifici</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="protocol" class="section alt clinicians-it-content">
+        <div class="section-heading">
+          <p class="eyebrow">Annotazione</p>
+          <h2>Protocollo di Annotazione</h2>
+        </div>
+        <div class="prose">
+          <p>I referti vanno compilati in <strong>formato testuale libero</strong>, valutando ciascun campo del template. Le informazioni non presenti devono essere omesse, <strong>evitando di riportare esplicitamente l'assenza di reperti o caratteristiche non descritte.</strong></p>
+          <p>Durante l'annotazione è consigliabile seguire sempre la stessa progressione di valutazione, così da garantire coerenza tra i diversi casi. Le misure vanno sempre riportate in millimetri.</p>
+          <p>In caso di lesioni multiple, il protocollo di annotazione deve essere ripetuto per ciascuna lesione, in modo da rendere sempre chiaro a quale lesione si riferiscono le informazioni riportate.</p>
+        </div>
+      </section>
+
+      <section class="section clinicians-it-content">
+        <div class="section-heading">
+          <p class="eyebrow">Classificazione</p>
+          <h2>Multifocale, Multicentrico, Singolo</h2>
+          <p>Nel protocollo sono definiti criteri specifici e oggettivi per classificare una lesione come singola, multifocale o multicentrica. ED è indicato in rosso, NETC in verde ed ET in blu.</p>
+        </div>
+        <div class="tumor-grid" aria-label="Tumor classification diagrams">
+          <figure>
+            <div class="tumor-diagram single">
+              <span class="ed"></span>
+              <span class="netc"></span>
+              <span class="et"></span>
+            </div>
+            <figcaption>Tumore singolo</figcaption>
+          </figure>
+          <figure>
+            <div class="tumor-diagram multicentric">
+              <span class="ed one"></span>
+              <span class="ed two"></span>
+              <span class="netc one"></span>
+              <span class="netc two"></span>
+              <span class="et one"></span>
+              <span class="et two"></span>
+            </div>
+            <figcaption>Tumore multicentrico</figcaption>
+          </figure>
+          <figure>
+            <div class="tumor-diagram multifocal">
+              <span class="ed"></span>
+              <span class="netc one"></span>
+              <span class="netc two"></span>
+              <span class="et one"></span>
+              <span class="et two"></span>
+            </div>
+            <figcaption>Tumore multifocale</figcaption>
+          </figure>
+          <figure>
+            <div class="tumor-diagram mixed">
+              <span class="ed one"></span>
+              <span class="ed two"></span>
+              <span class="netc one"></span>
+              <span class="netc two"></span>
+              <span class="netc three"></span>
+              <span class="et one"></span>
+              <span class="et two"></span>
+              <span class="et three"></span>
+            </div>
+            <figcaption>Tumore multicentrico con un centro singolo e uno multifocale</figcaption>
+          </figure>
+        </div>
+        <p class="legend-note">Definiamo come multicentrica una lesione in cui i corrispettivi ED sono separati, mentre multifocale nel caso non lo fossero.</p>
+      </section>
+
+      <section id="example" class="section alt clinicians-it-content">
+        <div class="section-heading">
+          <p class="eyebrow">Esempio</p>
+          <h2>Esempio di Referto Originale</h2>
+          <p>Il referto di esempio rappresenta il modello da seguire per la compilazione.</p>
+        </div>
+        <blockquote class="report">
+          <p>In sede parasagittale destra, in corrispondenza della regione cingolata posteriore/precuneale a prevalente interessamento cortico-sottocorticale, si documenta una singola formazione espansiva intrassiale a morfologia ovalare, a segnale disomogeneamente ipointenso in T1 e iperintenso in T2.</p>
+          <p>La lesione presenta componente centrale necrotica e orletto solido periferico con enhancement disomogeneo post-contrastografico, in parte lineare e in parte nodulare, intenso. Si associa enhancement piale.</p>
+          <p>È riferito marginale interessamento della porzione posteriore del corpo calloso in sede destra da parte del core tumorale. Le alterazioni iperintense in T2/FLAIR perilesionali, estese alla sostanza bianca profonda dei lobi parietale e occipitale destri, si propagano inoltre nel corpo calloso, tratto posteriore e medio in sede destra, con minimo sconfinamento controlaterale a sinistra a livello del corpo calloso posteriore.</p>
+          <p>La massa determina effetto espansivo con obliterazione degli spazi liquorali periencefalici in sede occipito-parietale posteriore destra e compressione del trigono, del corno occipitale e della porzione posteriore del corpo del ventricolo laterale destro. Si associa deviazione della linea mediana, setto pellucido, di circa 2 mm verso sinistra. Il ventricolo laterale sinistro presenta morfovolumetria conservata; III e IV ventricolo regolari. Non segni di erniazione.</p>
+          <p>Coesiste importante quadro di sofferenza microangiopatica cronica biemisferica.</p>
+        </blockquote>
+      </section>
+
+      <section class="section clinicians-it-content">
+        <div class="section-heading">
+          <p class="eyebrow">Mapping</p>
+          <h2>Referto Scomposto secondo il Template</h2>
+          <p>Questa scomposizione mostra come ciascun campo del template trovi una corrispondenza nel testo libero.</p>
+        </div>
+        <div class="table-wrap wide-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Campo</th>
+                <th>Finding</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>F003</td>
+                <td>Lato del Centro del Tumore</td>
+                <td>"In sede parasagittale destra", "regione cingolata posteriore/precuneale" e "parietale e occipitale destri".</td>
+              </tr>
+              <tr>
+                <td>F005</td>
+                <td>Qualità dell'Enhancement</td>
+                <td>"enhancement disomogeneo post-contrastografico, in parte lineare e in parte nodulare, intenso".</td>
+              </tr>
+              <tr>
+                <td>F010</td>
+                <td>Definizione del Margine Enhancing</td>
+                <td>"orletto solido periferico con enhancement disomogeneo post-contrastografico".</td>
+              </tr>
+              <tr>
+                <td>F011</td>
+                <td>Definizione del Margine Non-Enhancing</td>
+                <td>Assente nel referto, in quanto non ben definito.</td>
+              </tr>
+              <tr>
+                <td>F012</td>
+                <td>Emorragia Intratumorale</td>
+                <td>Assente nel referto.</td>
+              </tr>
+              <tr>
+                <td>F015</td>
+                <td>Eterogeneità del Tumore</td>
+                <td>"segnale disomogeneamente ipointenso in T1", "componente centrale necrotica" e "orletto solido periferico".</td>
+              </tr>
+              <tr>
+                <td>F018</td>
+                <td>Numero di Lesioni</td>
+                <td>Una sola lesione: "si documenta una singola formazione espansiva".</td>
+              </tr>
+              <tr>
+                <td>F019</td>
+                <td>Tipo di Lesione</td>
+                <td>Singola: "si documenta una singola formazione espansiva".</td>
+              </tr>
+              <tr>
+                <td>F020</td>
+                <td>Invasione Ependimale</td>
+                <td>Assente nel referto.</td>
+              </tr>
+              <tr>
+                <td>F021</td>
+                <td>Profondità del TC</td>
+                <td>"a prevalente interessamento cortico-sottocorticale".</td>
+              </tr>
+              <tr>
+                <td>F022</td>
+                <td>Macroarea del Centro del Tumore</td>
+                <td>"regione cingolata posteriore/precuneale" e "sede occipito-parietale posteriore destra".</td>
+              </tr>
+              <tr>
+                <td>F023</td>
+                <td>Spostamento della Linea Mediana</td>
+                <td>"deviazione della linea mediana, setto pellucido, di circa 2 mm verso sinistra".</td>
+              </tr>
+              <tr>
+                <td>F024</td>
+                <td>Forma del Tumore</td>
+                <td>"formazione espansiva intrassiale a morfologia ovalare".</td>
+              </tr>
+              <tr>
+                <td>F025</td>
+                <td>Origine del Tumore</td>
+                <td>"regione cingolata posteriore/precuneale a prevalente interessamento cortico-sottocorticale".</td>
+              </tr>
+              <tr>
+                <td>F026</td>
+                <td>Il Tumore Attraversa la Linea Mediana</td>
+                <td>"minimo sconfinamento controlaterale a sinistra a livello del corpo calloso posteriore".</td>
+              </tr>
+              <tr>
+                <td>F027</td>
+                <td>Reperti Specifici del Soggetto</td>
+                <td>"Si associa enhancement piale", "marginale interessamento della porzione posteriore del corpo calloso", "effetto espansivo con obliterazione degli spazi liquorali periencefalici" e "importante quadro di sofferenza microangiopatica cronica biemisferica".</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section alt clinicians-it-content">
+        <div class="section-heading">
+          <p class="eyebrow">Piattaforma</p>
+          <h2>Utilizzo della piattaforma ToothFairy4M</h2>
+        </div>
+        <div class="prose">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullamco laboriosam, nisi ut aliquid ex ea commodi consequatur.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>BraTS Reports Dataset Template</p>
+      <div class="footer-links">
+        <a href="mailto:omar.carpentiero@unimore.it?subject=BraTS%20Reports%20website%20feedback">Feedback / issues</a>
+        <a href="#top">Back to top</a>
+      </div>
+    </footer>
+    <script src="site.js"></script>
+  </body>
+</html>

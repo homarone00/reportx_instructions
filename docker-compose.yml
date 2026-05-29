@@ -6,7 +6,7 @@ services:
     volumes:
       - .:/usr/share/nginx/html:ro
     ports:
-      # http://ReportX.unimo.it:8096 → nginx
+      # http://ReportX.unimore.it:8096 → nginx
       - "8096:8080"
     networks:
       - internal
